@@ -1,0 +1,53 @@
+General Logistic:
+if button_on() is True:
+    start main program
+else (like if button is off):
+    stop main program
+
+Main program:
+display_time()
+if time_elapsed() >= 5sec (or some arbitrary time): (run always)
+    if force_sensed() is False: (run always)
+        chase_target()
+            if difference() <= 10cm:
+                spray_water()
+    else:
+        reset_time()
+        (just time = 0, and this should restart the whole program)
+else:
+    do nothing
+
+Input:
+    ultrasonic sensor
+    force sensor
+    button (press sensor I guess)
+    time elapsed(?)
+
+Output:
+    motor1&2
+    motor for spraying water
+    show count down time
+
+Main functions:
+            display_time(): get time elapsed, get the time interval you want,
+                            number = subtract to get the time displayed,
+                            display this number
+            chase_target()
+            spray_water()
+
+Set up functions: set_up_all_pin_numbers(doesn't need to be a helper function),
+                  set_up_buttons(both), set_up_timer(), set_up_OLED(), set_up_moving_motor1(),
+                  set_up_moving_motor2(), set_up_spray_water_motor(),
+                  set_up_ultrasonic_sensor(), set_up_force_sensor()
+                  (or just write one huge function to set up everything if that's easier)
+
+
+Helper functions for getting state of input:
+            button_on(on_button_state: HIGH/LOW, off_button_state: HIGH/LOW) -> Bool,
+            time_elapsed(current_time: unsigned long, start_time: unsigned long) -> unsigned long,
+            force_sensed(force: int) -> Bool,
+            current_distance() -> long
+
+Other helper functions:
+            difference(current_distance: int, expected: int) -> int,
+            reset_time() -> None
