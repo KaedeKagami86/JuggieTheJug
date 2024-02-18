@@ -1,3 +1,4 @@
+![alt text](https://github.com/[KaedeKagami86]/[JuggieTheJug]/blob/[main]/picture/prototype_view_2.jpg?raw=true)
 ## Inspiration
 One of us always forgets to drink water and only realizes we are dehydrated after getting headaches and other effects. We realized this is a common thing that happens to many people, especially nowadays since most people drink beverages instead of water. We wished there was a water jug that chases you down if you forgot to drink water- so we decided to make it!
 
