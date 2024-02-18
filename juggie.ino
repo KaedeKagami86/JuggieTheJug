@@ -22,9 +22,9 @@
 #define SCREEN_HEIGHT 32 // OLED display height, in pixels
 
 //define CONSTANTS:
-const unsigned long TimeInterval = 5.0; // 5sec = 5000 millisec (it actually displays 4)
+const unsigned long TimeInterval = 10.0; // 5sec = 5000 millisec (it actually displays 4)
 const long ExpectedDistance = 10.0; // how far away we want the target to be
-const int accidental_touch_value = 20; // from 0 to 20, just in case it's LIGHTLY touched
+const int accidental_touch_value = 1000; // from 0 to 20, just in case it's LIGHTLY touched
 
 // define VARIABLES:
 // for buttons
@@ -94,7 +94,6 @@ void setup() {
 
   // get starting time
   StartTime = millis();
-
 }
 
 void loop() {
@@ -102,20 +101,23 @@ void loop() {
   // read the state of the pushbutton value:
   Button1_State = digitalRead(Button1_Pin); // read from button1
   Button2_State = digitalRead(Button2_Pin); // read from button2
-
+  if (Button1_State == HIGH) {
+    reset_time();
+  }
   // main program + turn on/off light to show us it's ON/OFF right now
   if (button_ON()) { // if button is ON
     digitalWrite(LED_BUILTIN, HIGH); // LED is on
     display_time(); // start countdown + display time
     if (time_elapsed() >= TimeInterval) { // if our time interval is up (time up!)
-      if (force_sensed() == false) { // if water jug not held
+      if (!force_sensed()) { // if water jug not held
         chase_target(); // chase
         if (difference() <= ExpectedDistance) { // if current distance away from target is what we want
           spray_water(); // spray
         }
-      } else { // if water jug is held
+      } else if (force_sensed()) { // if water jug is held
         reset_time(); // make timer start from 0 again by setting TimeElapsed = 0
         // this should restart the whole program
+        stop_everything();
       }
     }
   } else { // if button is OFF
@@ -202,6 +204,7 @@ void display_time() {
   if ((TimeElapsed != pervious_time) && (CountDown > 0)) {
     pervious_time = TimeElapsed;
     CountDown = TimeInterval - TimeElapsed;
+
     oled.setCursor(60, 10);  
     oled.clearDisplay();
     oled.print(CountDown);
@@ -215,7 +218,8 @@ unsigned long time_elapsed() {
 }
 
 void reset_time() {
-  TimeElapsed = 0;
+  CountDown = 100;
+  StartTime = millis();
 }
 
 // ---------- FORCE HELPER ----------
