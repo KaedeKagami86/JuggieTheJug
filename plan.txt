@@ -1,7 +1,9 @@
 General Logistic:
 if button_on() is True:
+    keep built in light on just to show us
     start main program
 else (like if button is off):
+    keep built in light off just to show us
     stop main program
 
 Main program:
@@ -16,6 +18,7 @@ if time_elapsed() >= 5sec (or some arbitrary time): (run always)
         (just time = 0, and this should restart the whole program)
 else:
     do nothing
+    stop_everything()
 
 Input:
     ultrasonic sensor
@@ -29,25 +32,33 @@ Output:
     show count down time
 
 Main functions:
-            display_time(): get time elapsed, get the time interval you want,
+            V display_time(): get time elapsed, get the time interval you want,
                             number = subtract to get the time displayed,
                             display this number
-            chase_target()
-            spray_water()
+            V chase_target(): if difference between expected and current distance is between 0-10, don't chase (turn off motor)
+                            it difference between expected and current distance > 10, chase (turn on motor)
+            V spray_water(): turn on water motor
 
-Set up functions: set_up_all_pin_numbers(doesn't need to be a helper function),
-                  set_up_buttons(both), set_up_timer(), set_up_OLED(), set_up_moving_motor1(),
-                  set_up_moving_motor2(), set_up_spray_water_motor(),
-                  set_up_ultrasonic_sensor(), set_up_force_sensor()
+Set up functions: V set_up_all_pin_numbers(doens't need to be a helper): all three motors, ultrasonic sensor, force sensor, OLED
+                  V set_up_buttons(both), 
+                  V set_up_timer(), 
+                  V set_up_OLED(), 
+                  V set_up_moving_motor1(),
+                  V set_up_moving_motor2(), 
+                  V set_up_spray_water_motor(),
+                  V set_up_ultrasonic_sensor(),
+                  V set_up_force_sensor()
                   (or just write one huge function to set up everything if that's easier)
 
 
 Helper functions for getting state of input:
-            button_on(on_button_state: HIGH/LOW, off_button_state: HIGH/LOW) -> Bool,
-            time_elapsed(current_time: unsigned long, start_time: unsigned long) -> unsigned long,
-            force_sensed(force: int) -> Bool,
-            current_distance() -> long
+            DELETED: [button_on(on_button_state: HIGH/LOW, off_button_state: HIGH/LOW) -> Bool],
+            NEW: V switchON(), V switchOFF() // change switch state accordingly to button state
+            V time_elapsed(current_time: unsigned long, start_time: unsigned long) -> unsigned long,
+            V force_sensed(force: int) -> Bool,
+            V current_distance() -> long
 
 Other helper functions:
-            difference(current_distance: int, expected: int) -> int,
-            reset_time() -> None
+            V difference(current_distance: long, expected: long) -> long !!change type of output?!,
+            V reset_time() -> None
+            V stop everything
