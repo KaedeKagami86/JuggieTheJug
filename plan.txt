@@ -1,5 +1,5 @@
 General Logistic:
-if button_on() is True:
+if button_ON() is True:
     keep built in light on just to show us
     start main program
 else (like if button is off):
@@ -52,8 +52,8 @@ Set up functions: V set_up_all_pin_numbers(doens't need to be a helper): all thr
 
 
 Helper functions for getting state of input:
-            DELETED: [button_on(on_button_state: HIGH/LOW, off_button_state: HIGH/LOW) -> Bool],
-            NEW: V switchON(), V switchOFF() // change switch state accordingly to button state
+            V DELETED BUT NOW BACK: [button_ON(on_button_state: HIGH/LOW, off_button_state: HIGH/LOW) -> Bool],
+            DELETED: switchON(), switchOFF() // change switch state accordingly to button state, on if button1 pressed, off if button2 pressed
             V time_elapsed(current_time: unsigned long, start_time: unsigned long) -> unsigned long,
             V force_sensed(force: int) -> Bool,
             V current_distance() -> long
