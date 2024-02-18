@@ -10,8 +10,8 @@
 #define FORCE_SENSOR_PIN A3 // the FSR and 10K pulldown are connected to A3
 #define motor1input1 2 // In1
 #define motor1input2 3 // In2
-#define motor2input1 4; // In3
-#define motor2input2 5; // En2
+#define motor2input1 4 // In3
+#define motor2input2 5 // En2
 
 // define screen size (if your OLED 123x64)
 #define SCREEN_WIDTH 128 // OLED display width,  in pixels
